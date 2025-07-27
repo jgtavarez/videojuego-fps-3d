@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS Gallery - Call of Duty Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+        
+        #gameContainer {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        #hud {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            pointer-events: none;
+        }
+        
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff0000;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.2);
+            pointer-events: none;
+        }
+        
+        #menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+        
+        .menu-button {
+            background: #333;
+            color: #fff;
+            border: 2px solid #666;
+            padding: 15px 30px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+            pointer-events: auto;
+            border-radius: 5px;
+            min-width: 200px;
+        }
+        
+        .menu-button:hover {
+            background: #555;
+            border-color: #999;
+            transform: scale(1.05);
+        }
+        
+        #gameOverMenu .menu-button {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        #instructions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            pointer-events: none;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            z-index: 300;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="loading">CARGANDO...</div>
+        
+        <div id="menu">
+            <h1 style="font-size: 48px; margin-bottom: 50px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">FPS GALLERY</h1>
+            <div id="mainMenu">
+                <button class="menu-button" id="startGame">INICIAR JUEGO</button>
+            </div>
+            <div id="pauseMenu" class="hidden">
+                <h2>JUEGO PAUSADO</h2>
+                <button class="menu-button" id="resumeGame">REANUDAR</button>
+                <button class="menu-button" id="exitToMenu">MENÚ PRINCIPAL</button>
+            </div>
+            <div id="gameOverMenu" class="hidden" style="border-radius: 10px; padding: 30px;">
+                <h2 id="gameOverText" style="margin-bottom: 30px; font-weight: bold;">JUEGO TERMINADO</h2>
+                <p id="finalScore" style="font-size: 24px; margin: 15px 0;">Puntuación: 0</p>
+                <p id="finalLives" style="font-size: 24px; margin: 15px 0;">Vidas restantes: 0</p>
+                <div style="margin-top: 30px;">
+                    <button class="menu-button" id="restartGame">🔄 JUGAR DE NUEVO</button>
+                    <button class="menu-button" id="backToMenu">🏠 MENÚ PRINCIPAL</button>
+                </div>
+            </div>
+
+        </div>
+        
+        <div id="ui">
+            <div id="crosshair"></div>
+            <div id="hud">
+                <div>Munición: <span id="ammo">20</span></div>
+                <div>Vidas: <span id="lives">3</span></div>
+                <div>Puntuación: <span id="score">0</span></div>
+                <div>Nivel: <span id="level">1</span></div>
+            </div>
+            <div id="instructions">
+                <div>FLECHAS: Movimiento</div>
+                <div>RATÓN: Apuntar</div>
+                <div>CLIC IZQ: Disparar</div>
+                <div>ESC: Pausa</div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html> 
